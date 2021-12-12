@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import ListUser from "../../components/todoApp/listUser";
 import {UserType} from "../../interfaces";
+import {Loading} from "../../components/common/loading";
 
 const TodoPage = () => {
     const [users, setUsers] = useState<UserType[]>([])
@@ -24,25 +25,26 @@ const TodoPage = () => {
     }
 
     return (
-    <Container component={Paper} maxWidth={false}>
-        <Box mt={10}>
-            <Typography variant="h3" component="h2">
-                To do App
-            </Typography>
-            <Box mt={6}>
-                <Box display="flex" justifyContent="flex-end" mb={2}>
-                    <Link href={'/todoApp/new'}>
-                        <Button color="success" variant="contained">Create</Button>
-                    </Link>
+        <Container component={Paper} maxWidth={false}>
+                <Box mt={10}>
+                    <Typography variant="h4">
+                        To do app list user
+                    </Typography>
+                    <Box mt={6} mb={6}>
+                        <Box display="flex" justifyContent="flex-end" mb={2}>
+                            <Link href={'/todoApp/new'}>
+                                <Button color="success" variant="contained">Create</Button>
+                            </Link>
+                        </Box>
+                        <Loading loading={!users}>
+                            <ListUser
+                                list={users}
+                                onDelete={handleDeleteUser}
+                            />
+                        </Loading>
+                    </Box>
                 </Box>
-                <ListUser
-                    list={users}
-                    onDelete={handleDeleteUser}
-                />
-
-            </Box>
-        </Box>
-    </Container>
+        </Container>
     )
 }
 

@@ -32,6 +32,8 @@ export const useRequiredInput = (
     errorText: string,
 ): RequiredInputResult => {
     const [value, setValue] = useState(initialValue)
+    console.log('value', value)
+    console.log('initialValue', initialValue)
     const [error, setError] = useState('')
     const onBlur = () => {
         if (value?.length > 0) {

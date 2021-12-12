@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import {FormControl, FormHelperText, OutlinedInput, Typography, Box, Button} from "@mui/material";
 import {useNumberInput, useRequiredInput} from "../../hooks/form";
 import {UserType} from "../../interfaces";
@@ -11,21 +11,28 @@ export type UserFormType = {
 export const UserForm = (props: UserFormType) => {
     const { userItem, onSubmit } = props
     const [nameProps, nameError] = useRequiredInput(
-        userItem.fullName || '',
+        userItem?.fullName || '',
         'Full name is required')
     const [ageProps, ageError] = useNumberInput(
-        userItem.age || '',
+        userItem?.age || '',
         'Age is required',
         'Age Number')
     const [addressProps, addressError] = useRequiredInput(
-        userItem.address || '',
+        userItem?.address || '',
         'Address is required')
     const [phoneNumberProps, phoneNumberError] = useNumberInput(
-        userItem.phoneNumber || '',
+        userItem?.phoneNumber || '',
         'Phone Number is required',
         'Phone Number')
 
+    const isValid = useMemo(() => {
+        return nameProps.value && ageProps.value && addressProps.value && phoneNumberProps.value
+    }, [nameProps.value, ageProps.value, addressProps.value, phoneNumberProps.value])
+
     const handleSubmitForm = () => {
+        if (!isValid) {
+            return
+        }
         onSubmit({
             fullName: nameProps.value,
             age: Number(ageProps.value),
@@ -64,9 +71,8 @@ export const UserForm = (props: UserFormType) => {
                 <OutlinedInput {...phoneNumberProps} type="text" />
                 <FormHelperText>{phoneNumberError}</FormHelperText>
             </FormControl>
-
             <Box style={{paddingBottom: 40}} mt={4} display="flex" alignItems="center" justifyContent="center">
-                <Button onClick={handleSubmitForm} size="large" color="primary" variant="contained">Submit</Button>
+                <Button onClick={handleSubmitForm} disabled={!isValid} size="large" color="primary" variant="contained">Submit</Button>
             </Box>
         </Box>
     )
