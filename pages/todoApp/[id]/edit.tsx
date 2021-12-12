@@ -18,7 +18,7 @@ const UserEdit = () => {
 
     const fetchUserItem = async () => {
         try {
-            const res = await axios.get(`http://61ab8c03264ec200176d4245.mockapi.io/api/v1/users/${id}`)
+            const res = await axios.get(`https://61ab8c03264ec200176d4245.mockapi.io/api/v1/users/${id}`)
             setUserItem(res.data)
         } catch (e) {
             setOpenFlash(true)
@@ -35,7 +35,7 @@ const UserEdit = () => {
         try {
             setOpenFlash(true)
             setTypeFlash('success')
-            await axios.put(`http://61ab8c03264ec200176d4245.mockapi.io/api/v1/users/${id}`, params)
+            await axios.put(`https://61ab8c03264ec200176d4245.mockapi.io/api/v1/users/${id}`, params)
             router.push('/todoApp')
         } catch (e) {
             setOpenFlash(true)

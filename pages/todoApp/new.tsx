@@ -16,7 +16,7 @@ const UserNew = () => {
         try {
             setOpenFlash(true)
             setTypeFlash('success')
-            await axios.post('http://61ab8c03264ec200176d4245.mockapi.io/api/v1/users', params)
+            await axios.post('https://61ab8c03264ec200176d4245.mockapi.io/api/v1/users', params)
             router.push('/todoApp')
         } catch (e) {
             setOpenFlash(true)

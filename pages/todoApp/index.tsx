@@ -11,7 +11,7 @@ const TodoPage = () => {
     const [users, setUsers] = useState<UserType[]>([])
 
     const fetchUserList = async () => {
-        const res = await axios.get('http://61ab8c03264ec200176d4245.mockapi.io/api/v1/users')
+        const res = await axios.get('https://61ab8c03264ec200176d4245.mockapi.io/api/v1/users')
         setUsers(res.data)
     }
 
@@ -20,7 +20,7 @@ const TodoPage = () => {
     },[])
 
     const handleDeleteUser = async (id: number) => {
-        await axios.delete(`http://61ab8c03264ec200176d4245.mockapi.io/api/v1/users/${id}`)
+        await axios.delete(`https://61ab8c03264ec200176d4245.mockapi.io/api/v1/users/${id}`)
         fetchUserList()
     }
 
